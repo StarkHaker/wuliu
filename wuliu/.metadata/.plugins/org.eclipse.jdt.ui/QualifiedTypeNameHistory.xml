@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
+<fullyQualifiedTypeName name="org.springframework.web.context.annotation.RequestScope"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="com.qst.ssm.dao.AdminDao"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="com.qst.ssm.pojo.SysUser"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="com.qst.ssm.dao.DriverDao"/>
+<fullyQualifiedTypeName name="com.qst.ssm.dao.YunDanDao"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
+<fullyQualifiedTypeName name="com.qst.ssm.pojo.UserCar"/>
+<fullyQualifiedTypeName name="com.qst.ssm.dao.UserCarDao"/>
+<fullyQualifiedTypeName name="com.qst.ssm.pojo.YunDan"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="com.qst.ssm.dao.YongHDao"/>
+<fullyQualifiedTypeName name="com.qst.ssm.pojo.Client"/>
+<fullyQualifiedTypeName name="com.qst.ssm.dao.BKSiJiDao"/>
+<fullyQualifiedTypeName name="com.qst.ssm.pojo.Driver"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qst.ssm.dao.InsiderInfoDao">
+	<resultMap type="com.qst.ssm.pojo.InsiderInfo" id="Iinfo">
+		<id property="Iid" column="Iid"/>
+		<result property="Account" column="Account"/>
+		<result property="UserName" column="UserName"/>
+		<result property="Passwd" column="Passwd"/>
+		<result property="sex" column="sex"/>
+		<result property="phone" column="phone"/>
+		<result property="Motto" column="Motto"/>
+		<result property="IsDeleted" column="IsDeleted"/>
+		<result property="UserPic" column="UserPic"/>
+		<collection property="interestType" ofType="com.qst.ssm.pojo.InterestType">
+			<id property="Inid" column="Inid" />
+			<result property="Itype" column="Itype" />
+		</collection>
+	</resultMap>
+	
+	<select id="findInsiderInfoByPage" resultMap="Iinfo">	
+		SELECT
+			*
+		FROM
+			insider_info
+		INNER JOIN 
+			int_ins ON  insider_info.Iid = int_ins.Pid
+		INNER JOIN 
+			interest_type ON int_ins.Fid = interest_type.Inid
+		WHERE
+		 	1 = 1
+		<if test="Account != null and Account != ''">
+		 AND
+		 	Account = #{Account}
+		 </if>
+		 <if test="UserName != null and UserName != ''">
+		 AND
+		 	UserName = #{UserName}
+		 </if>
+		 <if test="Inid != null and Inid != '' and Inid != 0">
+		 AND
+		 	interest_type.Inid = #{Inid}	
+		 </if>
+	</select>
+	
+	<delete id="deleteInsiderById">
+		DELETE
+		FROM
+			insider_info
+		WHERE
+			Iid = #{Iid}
+	</delete>
+	<select id="getInsiderinfoByUsername" resultMap="Iinfo" parameterType="com.qst.ssm.pojo.InsiderInfo">
+		SELECT
+			Account,UserName,Passwd,sex,phone,Motto,Iid
+		FROM 
+			 insider_info
+
+	<where>
+		<if test="UserName!=null">
+			UserName = #{UserName}
+		</if>
+		<if test="IsDeleted!=null">
+			 and IsDeleted = #{IsDeleted}
+		</if> 
+	</where>
+	</select>
+<update id="updateInsiderInfo"  parameterType="com.qst.ssm.pojo.InsiderInfo">
+update insider_info
+ <set>
+  <if test="Motto!=null">Motto=#{Motto},</if>
+  <if test="Passwd!=null">Passwd=#{Passwd},</if>
+  <if test="UserName!=null">UserName=#{UserName},</if>
+  <if test="phone!=null">Phone=#{phone}</if>
+ </set>
+ WHERE Iid=#{Iid}
+</update>
+<select id="getInsiderinfoByString" parameterType="java.util.Map" resultMap="Iinfo">
+select * from insider_info where UserName  like #{userName}
+</select>
+<update id="updateInsiderinfoByid">
+update insider_info set UserPic=#{1} where Iid=#{0};
+</update>
+</mapper>

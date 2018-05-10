@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qst.ssm.dao.InterestTypeDao">
+	<resultMap type="com.qst.ssm.pojo.InterestType" id="interestType">
+		<id property="Inid" column="Inid"/>
+		<result property="Itype" column="Itype"/>
+	</resultMap>
+	
+	<select id="findInteByPage" resultMap="interestType">
+		SELECT
+			Inid,
+			Itype
+		FROM
+			interest_type
+		WHERE
+			1 = 1
+		<if test="Inid != null and Inid != 0">
+			AND
+				Inid = #{Inid}
+		</if>
+		<if test="Itype != null and Itype != ''">
+			AND
+				Itype LIKE "%"#{Itype}"%"
+		</if>
+	</select>
+	
+	<select id="findAllInte" resultMap="interestType">
+		SELECT
+			Inid,
+			Itype
+		FROM
+			interest_type
+		WHERE
+			1 = 1
+	</select>
+	
+	<insert id="insertInterestType">
+		INSERT INTO
+			interest_type(Itype)
+		VALUES(#{Itype})
+	</insert>
+	
+	<update id="updateInterestType">
+		UPDATE interest_type
+		<set>
+			Itype = #{Itype}
+		</set>
+		WHERE
+			Inid = #{Inid}
+	</update>
+	
+	<delete id="deleteInterestType">
+		DELETE FROM
+			interest_type
+		WHERE
+			Inid=#{Inid}
+	</delete>
+</mapper>

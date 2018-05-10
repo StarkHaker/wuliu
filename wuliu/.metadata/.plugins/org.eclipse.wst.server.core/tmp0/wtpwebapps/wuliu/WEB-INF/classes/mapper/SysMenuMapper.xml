@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qst.ssm.dao.SysMenuDao">
+	<resultMap type="com.qst.ssm.pojo.SysMenu" id="menu">
+		<id property="Mid" column="Mid"/>
+		<result property="Mname" column="Mname"/>
+		<result property="Pid" column="Pid"/>
+		<result property="Murl" column="Murl"/>
+		<result property="Describes" column="Describes"/>
+		<result property="IsDeleted" column="IsDeleted"/>
+	</resultMap>
+	
+	<select id="findMenuByPage" resultMap="menu">
+		SELECT
+			Mid, Mname, Pid, Murl, Describes, IsDeleted
+		FROM
+			sys_menu
+		WHERE
+			1 = 1
+		<if test="Mname != null and Mname != '' ">
+		AND	
+		    Mname like '%' #{Mname} '%'
+		</if>
+	</select>
+	
+	<select id="select" resultMap="menu">
+		SELECT
+			Mid, Mname, Pid, Murl, Describes, IsDeleted
+		FROM
+			sys_menu
+		WHERE
+			1 = 1
+	</select>
+	
+	<select id="getMenuById" resultMap="menu">
+		SELECT
+			Mid, Mname, Pid, Murl, Describes, IsDeleted
+		FROM
+			sys_menu
+		WHERE
+			Mid = #{Mid}
+	</select>
+	
+	<update id="updateMenu">
+		UPDATE sys_menu
+		<set>
+			Mname = #{Mname} , Pid = #{Pid} , Murl = #{Murl},  Describes = #{Describes}
+		</set>
+		WHERE
+			Mid = #{Mid};
+	</update>
+	
+	<insert id="insertMenu">
+		INSERT INTO sys_menu (
+			Mname,
+			Pid,
+			Murl,
+			Describes,
+			IsDeleted
+		)
+		VALUES
+		(#{Mname}, #{Pid}, #{Murl}, #{Describes}, 0 );
+	</insert>
+	
+	<delete id="deleteMenuById">
+		DELETE
+		FROM
+			sys_menu
+		WHERE
+			Mid = #{Mid}
+	</delete>
+</mapper>

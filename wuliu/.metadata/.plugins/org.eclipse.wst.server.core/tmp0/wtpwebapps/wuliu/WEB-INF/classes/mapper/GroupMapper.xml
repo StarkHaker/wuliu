@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qst.ssm.dao.GroupDao">
+
+<resultMap type="com.qst.ssm.pojo.Group" id="group">
+	
+	<id property="Gid" column="Gid"/>
+	<result property="Gname" column="Gname"/>
+	<result property="Gtime" column="Gtime"/>
+	<result property="Describes" column="Describe"/>
+
+	<association property="insiderInfo" javaType="com.qst.ssm.pojo.InsiderInfo">
+		<id property="Iid" column="Iid"/>
+		<result property="Account" column="Account"/>
+		<result property="UserName" column="UserName"/>
+		<result property="Passwd" column="Passwd"/>
+		<result property="sex" column="sex"/>
+		<result property="phone" column="phone"/>
+		<result property="Motto" column="Motto"/>
+		<result property="IsDeleted" column="IsDeleted"/>
+	</association>	
+	<association property="interestType" javaType="com.qst.ssm.pojo.InterestType">
+		<id property="Inid" column="Inid" />
+		<result property="Itype" column="Itype" />
+	</association>
+</resultMap>
+<select id="findGroupByPage" resultMap="group">
+	SELECT
+		`group`.Gid,
+		Gname,
+		`group`.`Describe`,
+		UserName,
+		Gtime
+	FROM
+		`group`
+	LEFT JOIN group_ins ON `group`.Gid = group_ins.Gid
+	LEFT JOIN insider_info ON `group`.Guser = insider_info.Iid
+	WHERE
+		insider_info.Iid = #{insiderInfo.Iid}
+</select>
+
+<select id="findInsiderInfoByGid" resultMap="group">
+	SELECT
+		insider_info.UserName,
+		insider_info.Sex
+	FROM
+		`group`
+	LEFT JOIN group_ins ON `group`.Gid = group_ins.Gid
+	LEFT JOIN insider_info ON group_ins.Iid = insider_info.Iid
+	WHERE
+		`group`.Gid = #{Gid}
+</select>
+
+<insert id="creatGroup">
+	INSERT INTO
+		`group`(
+			Gname,Gtime,`Describe`,Gtyep,Guser
+		)
+	VALUES
+		(#{Gname},#{Gtime},#{Describes},#{interestType.Inid},#{insiderInfo.Iid})
+</insert>
+</mapper>

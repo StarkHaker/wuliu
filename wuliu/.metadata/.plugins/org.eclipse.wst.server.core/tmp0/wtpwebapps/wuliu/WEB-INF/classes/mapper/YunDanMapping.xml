@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qst.ssm.dao.YunDanDao">
+<resultMap type="com.qst.ssm.pojo.YunDan" id="waybill">
+			<id property="id" column="id"/>
+			<result property="yundanH" column="yundanH"/>
+			<result property="yundaSJ" column="yundaSJ"/>
+			<result property="yundaFY" column="yundaFY"/>
+			<result property="huowuXX" column="huowuXX"/>
+			<result property="huowuZL" column="huowuZL"/>
+			<result property="huowuDX" column="huowuDX"/>
+			<result property="fahuoXM" column="fahuoXM"/>
+			<result property="fahuoDH" column="fahuoDH"/>
+			<result property="shhuoXM" column="shhuoXM"/>
+			<result property="shhuoDH" column="shhuoDH"/>
+			<result property="yunsuCL" column="yunsuCL"/>
+			<result property="zhhuoSJ" column="zhhuoSJ"/>
+			<result property="zhhuoDD" column="zhhuoDD"/>
+			<result property="xihuoDD" column="xihuoDD"/>
+			<result property="xihuoSJ" column="xihuoSJ"/>
+			<result property="yundaFY" column="yundaFY"/>
+			<result property="yundaZT" column="yundaZT"/>
+			<result property="kehuZH" column="kehuZH"/>
+			<result property="jiaofZT" column="jiaofZT"/>
+			
+			<association property="client" javaType="com.qst.ssm.pojo.Client">
+			<id property="id" column="id"/>
+			<result property="kehuYX" column="kehuYX"/>
+			<result property="kehuMM" column="kehuMM"/>
+			<result property="kehuXM" column="kehuXM"/>
+			<result property="kehuDH" column="kehuDH"/>
+			<result property="kehuXB" column="kehuXB"/>
+		</association>
+		<association property="usercar" javaType="com.qst.ssm.pojo.UserCar">
+			<id property="id" column="id"/>
+			<result property="yundanH" column="yundanH"/>
+			<result property="yunsuCL" column="yunsuCL"/>
+		</association>
+</resultMap>
+<insert id="inClientBill">
+	insert into tb_waybill (
+		yundanH,
+		yundaSJ,
+		huowuXX,
+		zhhuoDD,
+		xihuoDD,
+		huowuZL,
+		huowuDX,
+		fahuoXM,
+		fahuoDH,
+		shhuoXM,
+		shhuoDH,
+		yundaFY,
+		kehuZH,
+		yundaZT,
+		jiaofZT
+	)values(#{yundanH},#{yundaSJ},#{huowuXX},#{zhhuoDD},#{xihuoDD},#{huowuZL},#{huowuDX},
+	#{fahuoXM},#{fahuoDH},#{shhuoXM},#{shhuoDH},#{yundaFY},#{kehuZH},#{yundaZT},#{jiaofZT})
+</insert>
+<select id="findlistPage" resultMap="waybill">
+		SELECT
+			*
+		FROM
+			tb_waybill 	
+		where
+			1=1
+		 <if test="yundaZT != null">
+		 AND
+		 	yundaZT = #{yundaZT}
+		 </if>
+	</select>  
+<select id="findlistWCL" resultMap="waybill">
+		SELECT
+			*
+		FROM
+			tb_waybill 	
+		where
+		 	yundaZT = '未受理'	 
+	</select>	
+	<select id="findlistYFB" resultMap="waybill">
+		SELECT
+			*
+		FROM
+			tb_waybill 	
+		where
+		 	yundaZT = '已发布'	 
+	</select>
+	<select id="findlistYJD" resultMap="waybill">
+		SELECT
+			*
+		FROM
+			tb_waybill 	
+		where
+		 	yundaZT = '已接单'	 
+	</select>
+	
+<select id="qryYunDan" resultMap="waybill">
+	select * from tb_waybill
+	where 1=1 
+	 <if test="yundanH != null and yundanH !=''">
+		 AND
+	yundanH = #{yundanH}
+	</if>
+</select>
+<select id="findlistPageByPage" resultMap="waybill">
+		SELECT
+			*
+		FROM
+			tb_waybill 	
+		where
+		 	yundaZT = '已发布'	 
+	</select>
+	<update id="xiugaiZT">
+	UPDATE tb_waybill 
+		<set>
+			yundaZT = #{yundaZT} 
+		</set>
+		WHERE
+			yundanH = #{yundanH}
+	</update> 
+	<update id="yiJieDan">
+	UPDATE tb_waybill 
+		<set>
+			yundaZT = #{yundaZT} 
+		</set>
+		WHERE
+			yundanH = #{yundanH}
+	</update> 
+<update id="yundanXG">
+	UPDATE tb_waybill 
+		<set>
+			fahuoXM = #{fahuoXM},
+			fahuoDH = #{fahuoDH},
+			shhuoXM = #{shhuoXM},
+			shhuoXM = #{shhuoXM}
+		</set>
+		WHERE
+			yundanH = #{yundanH}
+	</update> 
+	
+</mapper>

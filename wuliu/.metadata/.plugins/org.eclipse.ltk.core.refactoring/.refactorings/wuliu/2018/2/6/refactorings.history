@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ClientMapping.xml&apos; to &apos;mapper&apos;&#x0D;&#x0A;- Original project: &apos;wuliu&apos;&#x0D;&#x0A;- Destination element: &apos;mapper&apos;&#x0D;&#x0A;- Original element: &apos;ClientMapping.xml&apos;" description="Copy file" element1="src/main/resources/mapper/ClientMapping.xml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1517928743715" target="/wuliu/src/main/resources/mapper" units="0" version="1.0"/>
+</session>

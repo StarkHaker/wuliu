@@ -1,0 +1,203 @@
+﻿
+body {
+	width: 700px;
+	margin: 100px auto 0 auto;
+	font-family: Arial, Helvetica;
+	font-size: small;
+	background: #444;
+}
+.contentOut{
+	margin-top: 30px;
+}
+.tabs {
+	overflow: hidden;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.tabs li {
+	float: left;
+	margin: 0 .5em 0 0;
+}
+.tabs a {
+	position: relative;
+	background: #ddd;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
+	background-image: -webkit-linear-gradient(top, #fff, #ddd);
+	background-image: -moz-linear-gradient(top, #fff, #ddd);
+	background-image: -ms-linear-gradient(top, #fff, #ddd);
+	background-image: -o-linear-gradient(top, #fff, #ddd);
+	background-image: linear-gradient(to bottom, #fff, #ddd);
+	padding: .7em 3.5em;
+	float: left;
+	text-decoration: none;
+	color: #444;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, .8);
+	-webkit-border-radius: 5px 0 0 0;
+	-moz-border-radius: 5px 0 0 0;
+	border-radius: 5px 0 0 0;
+	-moz-box-shadow: 0 2px 2px rgba(0, 0, 0, .4);
+	-webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, .4);
+	box-shadow: 0 2px 2px rgba(0, 0, 0, .4);
+}
+ .tabs a:hover, .tabs a:hover::after, .tabs a:focus, .tabs a:focus::after {
+ background: #fff;
+}
+.tabs a:focus {
+	outline: 0;
+}
+ .tabs a::after {
+ content:'';
+ position:absolute;
+ z-index: 1;
+ top: 0;
+ right: -.5em;
+ bottom: 0;
+ width: 1em;
+ background: #ddd;
+ background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
+ background-image: -webkit-linear-gradient(top, #fff, #ddd);
+ background-image: -moz-linear-gradient(top, #fff, #ddd);
+ background-image: -ms-linear-gradient(top, #fff, #ddd);
+ background-image: -o-linear-gradient(top, #fff, #ddd);
+ background-image: linear-gradient(to bottom, #fff, #ddd);
+ -moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, .4);
+ -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, .4);
+ box-shadow: 2px 2px 2px rgba(0, 0, 0, .4);
+ -webkit-transform: skew(10deg);
+ -moz-transform: skew(10deg);
+ -ms-transform: skew(10deg);
+ -o-transform: skew(10deg);
+ transform: skew(10deg);
+ -webkit-border-radius: 0 5px 0 0;
+ -moz-border-radius: 0 5px 0 0;
+ border-radius: 0 5px 0 0;
+}
+ .tabs .current a, .tabs .current a::after {
+ background: #fff;
+ z-index: 3;
+}
+/* ------------------------------------------------- */
+
+.content {
+	background: #fff;
+	padding: 2em;
+	position: relative;
+	z-index: 2;
+	-moz-border-radius: 0 5px 5px 5px;
+	-webkit-border-radius: 0 5px 5px 5px;
+	border-radius: 0 5px 5px 5px;
+	-moz-box-shadow: 0 -2px 3px -2px rgba(0, 0, 0, .5);
+	-webkit-box-shadow: 0 -2px 3px -2px rgba(0, 0, 0, .5);
+	box-shadow: 0 -2px 3px -2px rgba(0, 0, 0, .5);
+}
+.content h2, .content h3, .content p {
+	margin: 0 0 15px 0;
+}
+.tab2 div{
+	overflow: hidden;
+}
+.tab2 .inp_Div{
+	float: left;
+	padding-left:10px ;
+}
+.tab2 label{
+	margin-bottom: 10px;
+	display: inline-block;
+	width: 56px;
+	/*text-align: right;*/
+	padding: 0 5px;
+}
+.confirm_btn{
+	margin-top: 10px;
+}
+textarea{
+	width: 400px;
+	height: 120px;
+	overflow: hidden;
+}
+/* ------------------------------------------------- */
+
+.about {
+	color: #999;
+}
+.about a {
+	color: #eee;
+}
+.zebra{
+	/*font-size: 28px;*/
+	border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+}
+.zebra th{
+	font-weight: 600;
+}
+.zebra td, .zebra th {
+    padding: 8px;
+    border-bottom: 1px solid #f2f2f2;   
+    text-align: center; 
+}
+
+.zebra tbody tr:nth-child(even) {
+    background: #f5f5f5;
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
+    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;  
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
+}
+
+.zebra thead tr {
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5); 
+    border-bottom: 1px solid #ccc;
+    background-color: #eee;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#eee));
+    background-image: -webkit-linear-gradient(top, #f5f5f5, #eee);
+    background-image:    -moz-linear-gradient(top, #f5f5f5, #eee);
+    background-image:     -ms-linear-gradient(top, #f5f5f5, #eee);
+    background-image:      -o-linear-gradient(top, #f5f5f5, #eee); 
+    background-image:         linear-gradient(top, #f5f5f5, #eee);
+}
+
+.zebra th:first-child {
+    -moz-border-radius: 6px 0 0 0;
+    -webkit-border-radius: 6px 0 0 0;
+    border-radius: 6px 0 0 0;  
+}
+
+.zebra th:last-child {
+    -moz-border-radius: 0 6px 0 0;
+    -webkit-border-radius: 0 6px 0 0;
+    border-radius: 0 6px 0 0;
+}
+
+.zebra th:only-child{
+    -moz-border-radius: 6px 6px 0 0;
+    -webkit-border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;
+}
+
+.zebra tfoot td {
+    border-bottom: 0;
+    border-top: 1px solid #fff;
+    background-color: #f1f1f1;  
+}
+
+.zebra tfoot td:first-child {
+    -moz-border-radius: 0 0 0 6px;
+    -webkit-border-radius: 0 0 0 6px;
+    border-radius: 0 0 0 6px;
+}
+
+.zebra tfoot td:last-child {
+    -moz-border-radius: 0 0 6px 0;
+    -webkit-border-radius: 0 0 6px 0;
+    border-radius: 0 0 6px 0;
+}
+
+.zebra tfoot td:only-child{
+    -moz-border-radius: 0 0 6px 6px;
+    -webkit-border-radius: 0 0 6px 6px
+    border-radius: 0 0 6px 6px
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qst.ssm.dao.ClientDao">
+<resultMap type="com.qst.ssm.pojo.Client" id="client">
+			<id property="id" column="id"/>
+			<result property="kehuYX" column="kehuYX"/>
+			<result property="kehuMM" column="kehuMM"/>
+			<result property="kehuXM" column="kehuXM"/>
+			<result property="kehuDH" column="kehuDH"/>
+			<result property="kehuXB" column="kehuXB"/>
+</resultMap>
+<select id="qryClient" resultMap="client">
+	select * from tb_user 
+		where
+			1=1
+		 <if test="kehuYX != null and kehuYX != ''">
+		 AND
+		 	kehuYX = #{kehuYX}
+		 </if>
+		  <if test="kehuMM != null and kehuMM != ''">
+		 AND
+		 	kehuMM = #{kehuMM}
+		 </if>
+</select>
+<insert id="regist">
+	insert into tb_user (
+		kehuYX,
+		kehuMM
+	)values(#{kehuYX},#{kehuMM})
+</insert>
+</mapper>

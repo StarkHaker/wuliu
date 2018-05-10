@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qst.ssm.dao.RegisterDao">
+	<resultMap type="com.qst.ssm.pojo.InsiderInfo" id="register">
+		<id property="Iid" column="Iid"/>
+		<result property="Account" column="Account"/>
+		<result property="UserName" column="UserName"/>
+		<result property="Passwd" column="Passwd"/>
+		<result property="sex" column="sex"/>
+		<result property="Motto" column="Motto"/>
+		<result property="IsDeleted" column="IsDeleted"/>
+	</resultMap>
+	
+	
+	<!--此处Id与dao中方法名字相同  -->
+	<insert id="add">
+		INSERT INTO insider_info (
+			Account,
+			UserName,
+			Passwd
+		)
+		VALUES
+			(#{Account}, #{UserName}, #{Passwd})
+	</insert>
+	
+	<select id="select" resultMap="register">
+		SELECT 
+			Iid,
+			UserName,
+			Passwd,
+			Account,
+			Motto,
+			phone,
+			sex,
+			UserPic
+		FROM
+			insider_info
+		WHERE
+			1=1
+		 <if test="UserName != null and UserName != ''">
+		 AND
+		 	UserName = #{UserName}
+		 </if>
+		  <if test="Passwd != null and Passwd != ''">
+		 AND
+		 	Passwd = #{Passwd}
+		 </if>
+		   <if test="Account != null and Account != ''">
+		 AND
+		 	Account = #{Account}
+		 </if>
+		   <if test="Motto != null and Motto != ''">
+		 AND
+		 	Motto = #{Motto}
+		 </if>
+		 <if test="phone != null and phone != ''">
+		 AND
+		 	phone = #{phone}
+		 </if>
+		  <if test="sex != null and sex != ''">
+		 AND
+		 	sex = #{sex}
+		 </if>
+	</select>
+	<select id="findByUsername" resultMap="register">
+		SELECT 
+			Iid
+		FROM 
+			insider_info
+		WHERE
+			<if test="UserName != null and UserName != ''">
+		 AND
+		 	UserName = #{usernamesignup}
+		 </if>
+	</select>
+</mapper>

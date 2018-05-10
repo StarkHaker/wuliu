@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qst.ssm.dao.BKSiJiDao">
+<resultMap type="com.qst.ssm.pojo.Driver" id="driver">
+				<id property="cezuDH" column="cezuDH"/>
+			<result property="cezuMM" column="cezuMM"/>
+			<result property="cezuMZ" column="cezuMZ"/>
+			<result property="cezuID" column="cezuID"/>
+			<result property="qiceXH" column="qiceXH"/>
+			<result property="qiceZZ" column="qiceZZ"/>
+			<result property="qiceCP" column="qiceCP"/>
+</resultMap>
+
+<select id="findSJlist" resultMap="driver">
+		SELECT
+			*
+		FROM
+			tb_carmassage	
+		where
+			1=1
+		 <if test="cezuDH != null and cezuDH !=''">
+		 AND
+		 	cezuDH = #{cezuDH}
+		 </if>
+	</select>  
+
+<delete id="delete" >
+	delete from tb_carmassage where cezuDH = #{cezuDH}
+</delete>
+<select  id="findSJ" resultMap="driver">
+	select  * from 
+		tb_carmassage 
+	where  cezuDH =#{cezuDH}
+</select>
+	<update id="update">
+		update tb_carmassage
+		<set>
+		cezuMM =#{cezuMM},
+		cezuMZ =#{cezuMZ},
+		cezuID =#{cezuID},
+		qiceCP =#{qiceCP}
+		</set>
+		where cezuDH = #{cezuDH}
+	</update>
+</mapper>

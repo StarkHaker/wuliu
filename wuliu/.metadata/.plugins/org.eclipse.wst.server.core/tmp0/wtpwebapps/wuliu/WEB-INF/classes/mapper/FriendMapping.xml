@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qst.ssm.dao.FriendDao">
+<resultMap type="com.qst.ssm.pojo.Friend" id="friend">
+		<id property="Fid" column="Fid"/>
+		<association property="OtherId" javaType="com.qst.ssm.pojo.InsiderInfo">
+			<id property="Iid" column="Iid"/>
+			<result property="Account" column="Account"/>
+			<result property="UserName" column="UserName"/>
+			<result property="Passwd" column="Passwd"/>
+			<result property="sex" column="sex"/>
+			<result property="phone" column="phone"/>
+			<result property="Motto" column="Motto"/>
+			<result property="IsDeleted" column="IsDeleted"/>
+		</association>
+		<association property="SelfId" javaType="com.qst.ssm.pojo.InsiderInfo">
+			<id property="Iid" column="Iid"/>
+			<result property="Account" column="Account"/>
+			<result property="UserName" column="UserName"/>
+			<result property="Passwd" column="Passwd"/>
+			<result property="sex" column="sex"/>
+			<result property="phone" column="phone"/>
+			<result property="Motto" column="Motto"/>
+			<result property="IsDeleted" column="IsDeleted"/>
+		</association>
+		</resultMap>
+<insert id="savefriend" parameterType="java.util.Map" >
+INSERT INTO friend (
+			OtherId,
+			SelfId
+		)
+		VALUES
+			(#{fid}, #{iid})
+
+</insert>
+<select id="getFriendByfriend" resultMap="friend">
+SELECT
+	i2.UserName,i2.Account
+FROM
+	insider_info i1
+LEFT JOIN friend ON i1.Iid = friend.OtherID
+LEFT JOIN insider_info i2 ON i2.Iid = friend.SelfId
+WHERE
+	i1.Iid = #{Iid};
+</select>
+
+</mapper>

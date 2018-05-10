@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qst.ssm.dao.SysUserDao">
+	<resultMap type="com.qst.ssm.pojo.SysUser" id="user">
+		<id property="Uid" column="Uid"/>
+		<result property="Account" column="Account"/>
+		<result property="UserName" column="UserName"/>
+		<result property="Passwd" column="Passwd"/>
+		<result property="Describe" column="Describe"/>
+		<result property="Rid" column="Rid"/>
+	</resultMap>
+	<select id="findAllUserByPage" resultMap="user" >
+		SELECT
+			 u.Uid,u.Account,u.UserName,u.Passwd,u.Describe
+		FROM 
+			 sys_user u 
+		WHERE 1=1
+		<if test="UserName != null and UserName != ''">
+			and u.UserName like '%' #{UserName} '%'
+		</if>
+	</select>	
+	<select id = "selectAll" resultMap="user">
+		SELECT
+			 u.Uid,u.Account,u.UserName,u.Passwd,u.Describe,U.Rid
+		FROM 
+			 sys_user u 
+		WHERE 1=1
+		<if test="Uid != null and uid != 0">
+		AND Uid = #{Uid}
+		</if>
+	</select>
+
+	<select id="getUserByname" resultMap="user">
+		SELECT
+			Account,UserName,Passwd,Rid
+		FROM 
+			 sys_user
+		WHERE Account = #{Account} AND Passwd = #{Passwd}
+
+	</select>
+	<insert id="addUser" >
+		INSERT INTO sys_user (
+			Account,
+			UserName,
+			Passwd
+		)
+		VALUES
+		(#{Account}, #{UserName}, #{Passwd})
+	</insert>
+	<update id="userAllotrole">
+		UPDATE sys_user 
+		<set>
+			Rid = #{Rid}
+		</set> 
+			WHERE Uid = #{Uid};
+	</update>
+	<delete id="deleteUserById" parameterType="int">
+		DELETE
+		FROM
+			sys_user
+		WHERE
+			Uid = #{Uid}
+	</delete>
+
+
+</mapper>

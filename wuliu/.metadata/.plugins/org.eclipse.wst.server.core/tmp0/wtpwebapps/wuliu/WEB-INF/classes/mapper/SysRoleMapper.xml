@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qst.ssm.dao.SysRoleDao">
+	<resultMap type="com.qst.ssm.pojo.SysRole" id="role">
+		<id property="Rid" column="Rid"/>
+		<result property="Rname" column="Rname"/>
+		<result property="Rcode" column="Rcode"/>
+		<result property="Describe" column="Describes"/>
+		<result property="IsDeleted" column="IsDeleted"/>
+		
+		<collection property="menuList" ofType="com.qst.ssm.pojo.SysMenu">
+			<id property="Mid" column="Mid"/>
+			<result property="Mname" column="Mname"/>
+			<result property="Pid" column="Pid"/>
+			<result property="Murl" column="Murl"/>
+			<result property="Describes" column="Describes"/>
+			<result property="IsDeleted" column="IsDeleted"/>
+		</collection>
+	</resultMap>
+	
+	<select id="findAllRoleByPage"  resultMap="role">
+		SELECT
+			r.Rid,r.Rname,r.Rcode,r.DESCRIBES,r.IsDeleted
+		FROM
+			sys_role r
+		WHERE
+			1 = 1
+		<if test="Rname != null and Rname != ''">
+			and r.Rname like '%' #{Rname} '%'
+		</if>
+	</select>
+	<select id="select" resultMap="role">
+		SELECT
+			r.Rid,r.Rname,r.Rcode,r.DESCRIBES,r.IsDeleted
+		FROM
+			sys_role r
+		WHERE
+			1 = 1
+	</select>
+	<select id="selectMenuByRoleId" resultMap="role">
+		SELECT
+	r.Rname,r.Rcode,r.Describes, r.IsDeleted,
+	sm.Mid, sm.Mname,sm.Murl, sm.Describes,sm.Pid
+	FROM
+		sys_role r
+	LEFT JOIN sys_role_menu srm ON r.Rid = srm.Rid
+	LEFT JOIN sys_menu sm ON srm.Mid = sm.Mid
+	WHERE
+		r.Rid = #{Rid}
+	</select>
+	<select id="getRoleById" resultMap="role">
+		SELECT
+			r.Rid,r.Rname,r.Rcode,r.DESCRIBES,r.IsDeleted
+		FROM
+			sys_role r
+		WHERE
+			r.Rid = #{Rid};
+	</select>
+	
+	<update id="updateRole">
+		UPDATE sys_role 
+		<set>
+			Rname = #{Rname} , Rcode = #{Rcode} , Describes = #{Describes}
+		</set>
+		WHERE
+			Rid = #{Rid};
+	</update>
+	
+	<insert id="insertRole">
+		INSERT INTO sys_role (
+			Rname,
+			Rcode,
+			Describes,
+			IsDeleted
+		)
+		VALUES
+			(#{Rname}, #{Rcode}, #{Describes}, 0)
+	</insert>
+	<insert id="insertRoleMenu">
+		INSERT INTO sys_role_menu
+			VALUES
+		(0, #{Rid}, #{Mid}, 0);
+	</insert>
+	
+	<delete id="deleteUserById">
+		DELETE
+		FROM
+			sys_role
+		WHERE
+			Rid = #{Rid};
+	</delete>
+	
+	<delete id="deleteMenuByRid">
+		DELETE
+		FROM
+			sys_role_menu
+		WHERE
+			Rid = #{Rid};
+	</delete>
+</mapper>

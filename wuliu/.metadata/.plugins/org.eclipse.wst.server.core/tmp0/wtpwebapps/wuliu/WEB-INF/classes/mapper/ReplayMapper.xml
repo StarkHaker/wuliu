@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qst.ssm.dao.ReplayDao">
+	<resultMap type="com.qst.ssm.pojo.Replay" id="replay">
+		<id property="Rid" column="Rid"/>
+		<result property="Rtext" column="Rtext"/>
+		<result property="Rtime" column="Rtime"/>
+		<result property="Rpid" column="Rpid"/>
+		<result property="IsDeleted" column="IsDeleted"/>
+		
+		<association property="insiderInfo" javaType="com.qst.ssm.pojo.InsiderInfo">
+			<id property="Iid" column="Iid"/>
+			<result property="Account" column="Account"/>
+			<result property="UserName" column="UserName"/>
+			<result property="Passwd" column="Passwd"/>
+			<result property="sex" column="sex"/>
+			<result property="phone" column="phone"/>
+			<result property="Motto" column="Motto"/>
+			<result property="IsDeleted" column="IsDeleted"/>
+		</association>
+	</resultMap>
+	
+	<select id="findReplayByPage" resultMap="replay">
+		SELECT
+			Rid,Rtext,Rtime,Rpid,UserName
+		FROM
+			reply
+		LEFT JOIN
+			insider_info
+		ON
+			reply.Iid = insider_info.Iid
+		WHERE
+			Rpid = 0
+		AND
+			reply.IsDeleted = #{IsDeleted}
+	</select>
+	
+	<select id="findReplayById" resultMap="replay">
+		SELECT
+			Rid,Rtext,Rtime,Rpid,UserName
+		FROM
+			reply
+		LEFT JOIN
+			insider_info
+		ON
+			reply.Iid = insider_info.Iid
+		WHERE
+			Rpid = #{Rpid}
+	</select>
+	
+	<insert id="insertReply">
+		INSERT INTO
+			reply(
+				Rtext,Rtime,Rpid,Iid
+			)
+		VALUES
+			(#{Rtext},#{Rtime},#{Rpid},#{insiderInfo.Iid})
+	</insert>
+	
+	<insert id="insertFReply">
+		INSERT INTO
+			reply(
+				Rtext,Rtime,Rpid,Iid,IsDeleted
+			)
+		VALUES
+			(#{Rtext},#{Rtime},#{Rpid},#{insiderInfo.Iid},#{insiderInfo.Iid})
+	</insert>
+</mapper>

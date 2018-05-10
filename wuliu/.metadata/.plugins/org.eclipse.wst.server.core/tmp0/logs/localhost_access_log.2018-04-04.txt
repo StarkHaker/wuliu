@@ -1,0 +1,7 @@
+127.0.0.1 - - [04/Apr/2018:22:59:09 +0800] "GET / HTTP/1.1" 404 994
+127.0.0.1 - - [04/Apr/2018:22:59:19 +0800] "GET /wuliu/appPage/test.jsp HTTP/1.1" 500 3030
+127.0.0.1 - - [04/Apr/2018:22:59:20 +0800] "GET /favicon.ico HTTP/1.1" 404 1016
+127.0.0.1 - - [04/Apr/2018:22:59:42 +0800] "GET /wuliu/appPage/test.jsp HTTP/1.1" 200 1635
+127.0.0.1 - - [04/Apr/2018:23:00:07 +0800] "GET /wuliu/images/topleft.jpg HTTP/1.1" 500 113021
+127.0.0.1 - - [04/Apr/2018:23:00:14 +0800] "GET /wuliu/appPage/test.jsp HTTP/1.1" 200 1646
+127.0.0.1 - - [04/Apr/2018:23:00:35 +0800] "GET /wuliu/images/topleft.jpg HTTP/1.1" 500 108953

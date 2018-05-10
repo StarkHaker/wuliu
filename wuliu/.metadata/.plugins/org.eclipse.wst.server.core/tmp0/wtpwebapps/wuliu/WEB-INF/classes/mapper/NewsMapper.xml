@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qst.ssm.dao.NewsDao">
+	
+	<resultMap type="com.qst.ssm.pojo.News" id="news">
+		<id property="Nid" column="Nid"/>
+		<result property="Ntitle" column="Ntitle"/>
+		<result property="Ntext" column="Ntext"/>
+		<result property="Ntime" column="Ntime"/>
+		<result property="Nimage" column="Nimage"/>
+		<result property="IsDeleted" column="IsDeleted"/>
+		<result property="Uname" column="Uname"/>
+		
+		<!-- 配置多对一关系 -->
+		<association property="newsType" javaType="com.qst.ssm.pojo.NewsType">
+			<id property="NTid" column="NTid"/>
+			<result property="NTname" column="NTname"/>
+		</association>
+	</resultMap>
+
+	<select id="findNewsByPage" resultMap="news">
+		SELECT
+			news.Nid,
+			news.Ntitle,
+			news.Ntext,
+			news.Ntime,
+			news.Uname,
+			news_type.NTname
+		FROM
+			news
+		LEFT JOIN news_type ON news.NTid = news_type.NTid
+		WHERE
+			1=1
+		<if test="Ntitle != null and Ntitle != ''">
+			AND Ntitle LIKE "%"#{Ntitle}"%"
+		</if>
+		<if test="newsType != null and newsType.NTid != null and newsType.NTid != 0">
+			AND news_type.NTid = #{newsType.NTid}
+		</if>
+	</select>
+	
+	
+</mapper>
